@@ -28,7 +28,7 @@ function Games() {
           {history.map((item, i) => {
             return (
               <button key={i} onClick={() => timeTravelHandler(i)}>
-                <span>{i === 0 ? "Start Over" : `Jump to step: ${i}`}</span>
+                <span>{i === 0 ? "Start Over" : `You're at move: ${i}`}</span>
               </button>
             );
           })}

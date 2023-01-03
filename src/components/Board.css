@@ -6,3 +6,7 @@
 .square-board {
   display: flex;
 }
+
+.status {
+  margin-bottom: 20px;
+}
