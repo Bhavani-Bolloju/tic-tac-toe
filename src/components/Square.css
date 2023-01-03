@@ -23,4 +23,5 @@
 
 .kbd-navigation .square:focus {
   background: #ddd;
+  /* background-color: #c9896e; */
 }
