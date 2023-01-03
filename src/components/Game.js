@@ -7,6 +7,7 @@ function Games() {
   const [currentMove, setCurrentMove] = useState(0);
   const nextMove = currentMove % 2 === 0;
   const currentSquare = history[currentMove];
+  const [order, setOrder] = useState(true);
 
   const handlePlay = function (nextSquare) {
     const nextHistory = [...history, nextSquare];
@@ -20,11 +21,20 @@ function Games() {
     setCurrentMove(i);
   };
 
+  const sortingOrder = function () {
+    setOrder((prev) => !prev);
+  };
+
   return (
     <div className="game">
       <Board onPlay={handlePlay} squares={currentSquare} nextMove={nextMove} />
-      <div>
-        <div className="time-travel">
+      <div className="time-travel">
+        <button className="sort" onClick={sortingOrder}>
+          {order ? "Descending" : "Ascending"}
+        </button>
+        <div
+          className={!order ? "time-travel-list arrange" : "time-travel-list"}
+        >
           {history.map((item, i) => {
             return (
               <button key={i} onClick={() => timeTravelHandler(i)}>
