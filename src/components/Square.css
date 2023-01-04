@@ -1,12 +1,12 @@
 .square {
   background: #fff;
-  border: 1px solid #999;
+  border: 1.5px solid #eba67b;
   float: left;
-  font-size: 40px;
+  font-size: 45px;
   font-weight: bold;
   line-height: 34px;
-  height: 80px;
-  width: 80px;
+  height: 90px;
+  width: 90px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
@@ -26,5 +26,6 @@
 }
 
 .win {
-  background-color: #c9896e;
+  background-color: #c9896ee1;
+  color: #f9f7f7;
 }

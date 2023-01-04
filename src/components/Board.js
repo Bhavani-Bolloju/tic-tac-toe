@@ -29,7 +29,6 @@ function Squares({ onPlay, squares, nextMove, drawn }) {
   }
 
   const RenderSquare = function ({ i, box }) {
-    // console.log(box);
     return (
       <Square
         value={squares[i].value}

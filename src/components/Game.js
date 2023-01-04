@@ -49,7 +49,7 @@ function Games() {
       <Board
         onPlay={handlePlay}
         squares={currentSquare}
-        drawn={history.length > 9}
+        drawn={history.length > 9 && !calculateWinner(currentSquare)}
         nextMove={nextMove}
       />
       <div className="time-travel">

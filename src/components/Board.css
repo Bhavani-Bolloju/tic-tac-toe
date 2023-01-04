@@ -9,4 +9,6 @@
 
 .status {
   margin-bottom: 20px;
+  font-weight: 400;
+  align-self: center;
 }
