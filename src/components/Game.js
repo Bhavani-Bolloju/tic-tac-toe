@@ -12,24 +12,23 @@ function Games() {
   const nextMove = currentMove % 2 === 0;
   const [order, setOrder] = useState(true);
 
-  // console.log(history);
-
   const handlePlay = function (nextSquare) {
-    const nextHistory = [...history, nextSquare];
+    let nextHistory;
+
     if (calculateWinner(nextSquare).square) {
       const [a, b, c] = calculateWinner(nextSquare).order;
       const nextMatchSquare = [...nextSquare];
       nextMatchSquare[a] = { ...nextMatchSquare[a], status: true };
       nextMatchSquare[b] = { ...nextMatchSquare[b], status: true };
       nextMatchSquare[c] = { ...nextMatchSquare[c], status: true };
-      setHistory([...history, nextMatchSquare]);
+      nextHistory = [...history, nextMatchSquare];
     } else {
-      setHistory(nextHistory);
+      nextHistory = [...history, nextSquare];
     }
+
+    setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   };
-
-  // console.log(history);
 
   const timeTravelHandler = function (i) {
     const nextHistory = [...history].slice(0, i + 1);
@@ -43,7 +42,12 @@ function Games() {
 
   return (
     <div className="game">
-      <Board onPlay={handlePlay} squares={currentSquare} nextMove={nextMove} />
+      <Board
+        onPlay={handlePlay}
+        squares={currentSquare}
+        drawn={history.length > 9}
+        nextMove={nextMove}
+      />
       <div className="time-travel">
         <button className="sort" onClick={sortingOrder}>
           {order ? "Descending" : "Ascending"}

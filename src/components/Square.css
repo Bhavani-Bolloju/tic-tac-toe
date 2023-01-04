@@ -2,11 +2,11 @@
   background: #fff;
   border: 1px solid #999;
   float: left;
-  font-size: 24px;
+  font-size: 40px;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
-  width: 34px;
+  height: 80px;
+  width: 80px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
@@ -23,9 +23,8 @@
 
 .kbd-navigation .square:focus {
   background: #ddd;
-  /* background-color: #c9896e; */
 }
 
 .win {
-  background-color: red;
+  background-color: #c9896e;
 }

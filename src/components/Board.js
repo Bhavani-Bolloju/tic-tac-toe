@@ -1,16 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Square from "./Square";
 import { calculateWinner } from "./winner";
 import "./Board.css";
 
-function Squares({ onPlay, squares, nextMove }) {
+function Squares({ onPlay, squares, nextMove, drawn }) {
   const handleClick = function (i) {
-    if (calculateWinner(squares).square) {
+    if (calculateWinner(squares).square || squares[i].value) {
       return;
     }
-    if (squares[i].value) return;
     const nextSquare = [...squares];
-
     nextSquare[i] = nextMove
       ? { value: "X", status: null }
       : { value: "O", status: null };
@@ -23,6 +21,10 @@ function Squares({ onPlay, squares, nextMove }) {
     status = `Winner : ${calculateWinner(squares).square}`;
   } else {
     status = `Next Player : ${nextMove ? "X" : "O"}`;
+  }
+
+  if (drawn) {
+    status = `No one wins`;
   }
 
   const RenderSquare = function ({ i }) {
