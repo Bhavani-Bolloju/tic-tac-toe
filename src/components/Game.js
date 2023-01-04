@@ -11,8 +11,9 @@ function Games() {
   const currentSquare = history[currentMove];
   const nextMove = currentMove % 2 === 0;
   const [order, setOrder] = useState(true);
+  const [location, setLocation] = useState([[0, 0]]);
 
-  const handlePlay = function (nextSquare) {
+  const handlePlay = function (nextSquare, squareBox) {
     let nextHistory;
 
     if (calculateWinner(nextSquare).square) {
@@ -26,6 +27,7 @@ function Games() {
       nextHistory = [...history, nextSquare];
     }
 
+    setLocation((prev) => [...prev, squareBox]);
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   };
@@ -39,6 +41,8 @@ function Games() {
   const sortingOrder = function () {
     setOrder((prev) => !prev);
   };
+  // console.log(location, history);
+  // console.log(location.length, history.length);
 
   return (
     <div className="game">
@@ -58,7 +62,11 @@ function Games() {
           {history.map((item, i) => {
             return (
               <button key={i} onClick={() => timeTravelHandler(i)}>
-                <span>{i === 0 ? "Start Over" : `You're at move: ${i}`}</span>
+                <span>
+                  {i === 0
+                    ? "Start Over - (row, col)"
+                    : `You're at move: ${i} - (${location[i]})`}
+                </span>
               </button>
             );
           })}

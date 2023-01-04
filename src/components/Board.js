@@ -4,15 +4,16 @@ import { calculateWinner } from "./winner";
 import "./Board.css";
 
 function Squares({ onPlay, squares, nextMove, drawn }) {
-  const handleClick = function (i) {
+  const handleClick = function (i, box) {
     if (calculateWinner(squares).square || squares[i].value) {
       return;
     }
+    // console.log(box);
     const nextSquare = [...squares];
     nextSquare[i] = nextMove
       ? { value: "X", status: null }
       : { value: "O", status: null };
-    onPlay(nextSquare);
+    onPlay(nextSquare, [box]);
   };
 
   let status;
@@ -27,13 +28,14 @@ function Squares({ onPlay, squares, nextMove, drawn }) {
     status = `No one wins`;
   }
 
-  const RenderSquare = function ({ i }) {
+  const RenderSquare = function ({ i, box }) {
+    // console.log(box);
     return (
       <Square
         value={squares[i].value}
         status={squares[i].status}
         i={i}
-        onSquareClick={() => handleClick(i)}
+        onSquareClick={() => handleClick(i, box)}
       />
     );
   };
@@ -48,7 +50,13 @@ function Squares({ onPlay, squares, nextMove, drawn }) {
             {Array(3)
               .fill(0)
               .map((_, value) => {
-                return <RenderSquare i={3 * i + value} key={value} />;
+                return (
+                  <RenderSquare
+                    box={`${i + 1}, ${value + 1}`}
+                    i={3 * i + value}
+                    key={value}
+                  />
+                );
               })}
           </div>
         ))}
