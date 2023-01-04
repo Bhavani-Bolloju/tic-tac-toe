@@ -1,9 +1,13 @@
 import React from "react";
 import "./Square.css";
 
-const Square = function ({ onSquareClick, value }) {
+const Square = function ({ onSquareClick, value, status }) {
+  // console.log(status);
   return (
-    <button className="square" onClick={() => onSquareClick()}>
+    <button
+      className={!status ? "square" : "square win"}
+      onClick={() => onSquareClick()}
+    >
       {value}
     </button>
   );

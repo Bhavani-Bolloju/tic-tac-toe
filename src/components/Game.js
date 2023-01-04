@@ -1,19 +1,35 @@
 import React, { useState } from "react";
 import Board from "./Board";
+import { calculateWinner } from "./winner";
 import "./Game.css";
 
 function Games() {
-  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [history, setHistory] = useState([
+    Array(9).fill({ value: null, status: null }),
+  ]);
   const [currentMove, setCurrentMove] = useState(0);
-  const nextMove = currentMove % 2 === 0;
   const currentSquare = history[currentMove];
+  const nextMove = currentMove % 2 === 0;
   const [order, setOrder] = useState(true);
+
+  // console.log(history);
 
   const handlePlay = function (nextSquare) {
     const nextHistory = [...history, nextSquare];
-    setHistory(nextHistory);
+    if (calculateWinner(nextSquare).square) {
+      const [a, b, c] = calculateWinner(nextSquare).order;
+      const nextMatchSquare = [...nextSquare];
+      nextMatchSquare[a] = { ...nextMatchSquare[a], status: true };
+      nextMatchSquare[b] = { ...nextMatchSquare[b], status: true };
+      nextMatchSquare[c] = { ...nextMatchSquare[c], status: true };
+      setHistory([...history, nextMatchSquare]);
+    } else {
+      setHistory(nextHistory);
+    }
     setCurrentMove(nextHistory.length - 1);
   };
+
+  // console.log(history);
 
   const timeTravelHandler = function (i) {
     const nextHistory = [...history].slice(0, i + 1);
